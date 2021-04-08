@@ -1,0 +1,49 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+{% block title %}SERP{% endblock title %}
+
+{% block content %}
+
+{% include "search.html" %}
+
+{% if msg%}
+<p> Found about {{total_docs}} results for <b>{{text}}</b></p>
+
+
+{% for item in output %}
+<div style="margin: 15px 50px 75px 10px;">
+  <div class="row">
+    <div class="column" style="background-color:#eee; padding: 10px; border-radius:30px">
+
+      <a href={{item.identifier_sourceurl}}><b>{{item.title}}</b></a>
+      <br>
+      {{item.contributor_author}},
+      {{item.date_issued}},
+      {{item.contributor_department}}
+
+      <brsmall>
+      <b>Abstract</b>: {{item.description_abstract|slice:":210"}}...
+      <form action="/serpdetails/" method="POST" style="display: inline-block;">
+        {%csrf_token%}
+        <button class="btn btn-info  btn-sm" type="submit" name="handle" value={{item.handle}}
+          style="border:none;color: white;">More info</button>
+      </form>
+      <br>
+      <hr style="border: 1px solid black;">
+      <br>
+    </div>
+  </div>
+</div>
+<brsmall>
+{%endfor%}
+
+{% include "pagination.html" %}
+
+{%else%}
+<h5>{{output.0}}</h5>
+{% endif %}
+
+
+
+{% endblock content %}  
+                  

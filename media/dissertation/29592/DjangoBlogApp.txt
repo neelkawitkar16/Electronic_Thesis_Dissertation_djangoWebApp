@@ -1,0 +1,114 @@
+Django: Blog App
+
+Initial setup
+	- Create directory on desktop = blog
+	- install Django in new virtual environment
+	- install new django project = blog_project (inlcude the "." at the end of the command)
+	- create a new app = blog
+	- perform migration to setup the database
+	- update = settings.py  (so that Django knows about our new app => INSTALLED_APPS)
+
+Database Models
+	- blog/models.py
+	- after the new database model is created we need to create a new migration record for it and migrate the change into our database.
+	  	$python manage.py makemigrations blog
+		$python manage.py migrate blog	
+	- database is now configured
+
+Admin
+	- Create a superuser account
+		$ python manage.py createsuperuser
+	- http://127.0.0.1:8000/admin/
+	- update blog/admin.py
+
+URLs
+	- Create a file urls.py under blog. Configure blog/urls.py
+	- update blog_project/urls.py file
+
+Views
+	- blog/views.py = To display the contents of our Post model using ListView
+
+Templates
+	- Create a generic file in templates directory = base.html
+	- Create home.html file that inherits from base.html
+	- update settings.py so Django knows to look there for our templates
+		blog_project/settings.py = under TEMPLATES stick this: 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+
+Static Files
+	- Create a new directory = static
+	- Then update settings.py = to tell Django where to look for these static files
+		blog_project/settings.py below STATIC_URL => STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
+	- Now create a css directory within static and add a new base.css file in it
+		static/css/base.css
+	- Add static files to our templates by adding {% load static %} to the top of base.html
+		{% load static %} => to load the static file. Add it before <html> tag
+		<link href="{% static 'css/base.css' %}" rel="stylesheet">
+	- Now we can add static files to our static directory and they’ll automatically appear in all our templates.
+	
+Individual Blog Pages
+	- import generic class-based DetailView
+	- Create view = BlogDetailView
+	- Create new template = templates/post_detail.html
+
+URLConf 
+	- blogs/urls.py = BlogDetailView
+
+
+
+
+Chapter 6: Forms
+
+	- templates/base.html
+		{% url 'post_new' %} => +New Blog Post
+	- blog/urls.py
+		import BlogCreateView (not yet created) => path('post/new/', BlogCreateView.as_view(), name='post_new')
+
+	- blog/views.py
+		- import CreateView => class BlogCreateView(CreateView)
+		- template_name = 'post_new.html'
+
+	- blog/templates/post_new.html
+		
+	- blog/models.py
+		- import reverse => Reverse is a very handy utility function Django provides us to reference an object by its URL template name,
+		- get_absolute_url
+
+Update Forms
+	- templates/post_detail.html
+		<a href="{% url 'post_edit' post.pk %}"> + Edit Blog Post</a>
+
+	- templates/post_edit.html
+		form.as_p => to display our form fields with paragraph tags
+
+	- blogs/views.py
+		import UpdateView and then subclass it in our new view BlogUpdateView
+
+	- blogs/urls.py
+		- import BlogUpdateView from views
+		- add new route in urlpatterns => 'post/<int:pk>/edit/' with name='post_edit' 
+
+Delete View
+	- templates/post_detail.html
+		<a href="{% url 'post_delete' post.pk %}"> + Delete Blog Post</a>
+	
+	- templates/post_delete.html
+		post.title => to display the title of our blog (we can also use object.tite)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

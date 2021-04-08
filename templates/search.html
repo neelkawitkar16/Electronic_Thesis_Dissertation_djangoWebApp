@@ -1,0 +1,54 @@
+<div class="container">
+  <form method="post">
+    {%csrf_token%}
+    <div style="padding: 150px 140px">
+      <div class="fieldWrapper" style=" width: 700px;">
+        {{ form.searchtext.errors }}
+        <h2>Search Engine</h2>
+        {{ form.searchtext }}
+        <input type="submit" class="search-domain btn btn-primary px-5" style="margin-top: 10px; margin-left: 250px"
+          value="Search">
+
+        <button type="btn btn-information" name="button" onclick="document.getElementById('advancedSearch').removeAttribute('hidden')
+            " style="border:none;color: blue;background-color: white;font-size: 14px; border-radius:30px;"><h6>Advanced Search</h6></button>
+      </div>
+    </div>
+    <br>
+    <div id="advancedSearch" style=" width: 700px;" hidden>
+      <div class="fieldWrapper">
+        {{ form.contributor_department.errors }}
+        {{ form.contributor_department.label_tag }}
+        {{ form.contributor_department }}
+        <br>
+      </div>
+      <br>
+      <div class="fieldWrapper">
+        {{ form.publisher.errors }}
+        {{ form.publisher.label_tag }}
+        {{ form.publisher }}
+        <br>
+      </div>
+      <br>
+      <div class="fieldWrapper">
+        {{ form.date_issued.errors }}
+        {{ form.date_issued.label_tag }}
+        {{ form.date_issued }}
+        <br>
+      </div>
+      <br>
+
+
+      <div class="fieldWrapper">
+        Dates between:
+        {{ form.date1.errors }}
+        {{ form.date1.label_tag }}
+        {{ form.date1 }}
+
+        {{ form.date2.errors }}
+        {{ form.date2.label_tag }}
+        {{ form.date2 }}
+      </div>
+    </div>
+    <br>
+  </form>
+</div>

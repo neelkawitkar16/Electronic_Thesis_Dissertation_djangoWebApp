@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Summary Page{% endblock title %}
+
+{% block content %}
+
+
+<input type="button" style="margin-top: 10px;" class="btn btn-outline-dark btn-sm" value="Go Back to the Search Results"
+  onclick="history.back(-1)" />
+
+
+<h1 style="text-align: center;">Summary Page</h1>
+{% if msg%}
+
+<div style="border: 4px solid black; padding:20px">
+  <b>Title: </b>{{output.0.title}}
+  <br>
+  <b>Author: </b>{{output.0.contributor_author}}
+  <br>
+  <b>Author email: </b>{{output.0.Authoremail}}
+  <br>
+  <b>Committee chair: </b>{{output.0.contributor_committeechair}}
+  <br>
+  <b>Committee chair email: </b>{{output.0.Advisoremail}}
+  <br>
+  <b>Committee members: </b>{{output.0.contributor_committeemember}}
+  <br>
+  <b>Abstract: </b> {{output.0.description_abstract}}
+  <br>
+  <b>Degree level: </b> {{output.0.degree_level}}
+  <br>
+  <b>Publisher: </b> {{output.0.publisher}}
+  <br>
+  <b>Keywords: </b> {{output.0.subject}}
+  <br>
+  <b>Type: </b> {{output.0.type}}
+  <br>
+  <b>Date issued: </b> {{output.0.date_issued}}
+  <br>
+  <b>Sourceurl: </b> <a href={{output.0.identifier_sourceurl}}><b>{{output.0.identifier_sourceurl}}</b></a>
+  <br>
+  <b>Identifier url: </b> <a href={{output.0.identifier_uri}}><b>{{output.0.identifier_uri}}</b></a>
+<br>
+</div>
+<!-- <b>Downloads</b>
+<br>
+{% for item in fnames %}
+<a href={{item.url}} target="_blank"><button class="btn btn-success ml-2" type="submit"
+    style="display: inline-block;margin: 0;">
+    {{item.name}}</button></a>
+{%endfor%}
+<brbig>
+  <brbig>
+    <brbig> -->
+      <br>
+
+      {%else%}
+      <h5>{{output.0}}</h5>
+      {% endif %}
+
+{% if allclaims|length%}
+
+<h1>Previous claims:</h1>
+
+{% for claim in allclaims %}
+<!-- {{claim}} -->
+<div style="border: 4px dotted rgba(0, 0, 0, 0.932); padding:10px;">
+  <b>claim: </b>{{claim.claim_field}} <br>
+  <b>source_Code: </b>{{claim.source_Code}} <br>
+  <b>Can_you_reproduce_this_claim: </b>{{claim.Can_you_reproduce_this_claim}} <br>
+  <b>datasets: </b>{{claim.datasets}} <br>
+  <b>experiments_and_results: </b>{{claim.experiments_and_results}} <br>
+</div>
+<br>
+{% endfor %}
+
+
+{%else%}
+<h4>No claims yet on this thesis? Go on make your first claim now!</h4> <br>
+{% endif %}
+
+{% include "claim.html" %}
+
+{% endblock content %}  
