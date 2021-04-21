@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import CustomUser, SearchResultHistoryModel, HandleModel, ClaimModel
+from .models import CustomUser, SearchResultHistoryModel, HandleModel, ClaimModel, SaveItemModel, ClaimLikeModel
 from django.forms import CheckboxInput, HiddenInput
 import datetime
 
@@ -123,6 +123,13 @@ class UploadForm(forms.ModelForm):
         fields = ('handle',)
 
 
+class SaveItemForm(forms.ModelForm):
+    class Meta:
+        model = SaveItemModel
+        fields = ('handle',)
+
+
+
 #claim form
 CAN_YOU_REPRODUCE_CLAIM = [
     ('yes', 'Yes'),
@@ -150,3 +157,9 @@ class ClaimForm(forms.ModelForm):
     class Meta:
         model = ClaimModel
         fields = ('claim_field',)
+
+
+class ClaimLikeForm(forms.ModelForm):
+    class Meta:
+        model = ClaimLikeModel
+        fields = ('star', 'handle',)

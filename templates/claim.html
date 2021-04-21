@@ -1,6 +1,6 @@
 {% load crispy_forms_tags %}
 
-<div style="border: 4px dashed black; padding:20px; margin-bottom:40px">
+<div style="border: 4px dashed black; padding:20px; margin-bottom:40px; border-radius: 30px;">
   <form action="/claim/" method="POST">
     {% csrf_token %}
     {{form|crispy}}

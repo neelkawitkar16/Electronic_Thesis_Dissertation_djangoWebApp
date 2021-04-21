@@ -11,7 +11,7 @@
 <h1 style="text-align: center;">Summary Page</h1>
 {% if msg%}
 
-<div style="border: 4px solid black; padding:20px">
+<div style="border: 4px solid black; padding:20px; border-radius: 30px;">
   <b>Title: </b>{{output.0.title}}
   <br>
   <b>Author: </b>{{output.0.contributor_author}}
@@ -39,29 +39,29 @@
   <b>Sourceurl: </b> <a href={{output.0.identifier_sourceurl}}><b>{{output.0.identifier_sourceurl}}</b></a>
   <br>
   <b>Identifier url: </b> <a href={{output.0.identifier_uri}}><b>{{output.0.identifier_uri}}</b></a>
-<br>
+  <br>
+  <b>Downloads</b>
+  <br>
+  {% for item in fnames %}
+  <a href={{item.url}} target="_blank"><button class="btn btn-success ml-2" type="submit"
+      style="display: inline-block;margin: 0;">
+      {{item.name}}</button></a>
+  {%endfor%}
+  <br>
 </div>
-<!-- <b>Downloads</b>
-<br>
-{% for item in fnames %}
-<a href={{item.url}} target="_blank"><button class="btn btn-success ml-2" type="submit"
-    style="display: inline-block;margin: 0;">
-    {{item.name}}</button></a>
-{%endfor%}
-<brbig>
-  <brbig>
-    <brbig> -->
-      <br>
 
-      {%else%}
-      <h5>{{output.0}}</h5>
-      {% endif %}
+  {%else%}
+  <h5>{{output.0}}</h5>
+  {% endif %}
 
 {% if allclaims|length%}
+<br>
+<hr>
+<h1><i>Previous claims:</i></h1>
 
-<h1>Previous claims:</h1>
-
+<br>
 {% for claim in allclaims %}
+{% include "delete_claim_view.html"%}
 <!-- {{claim}} -->
 <div style="border: 4px dotted rgba(0, 0, 0, 0.932); padding:10px;">
   <b>claim: </b>{{claim.claim_field}} <br>
@@ -75,9 +75,11 @@
 
 
 {%else%}
-<h4>No claims yet on this thesis? Go on make your first claim now!</h4> <br>
+<br>
+<hr>
+<h4><i>No claims yet on this thesis? Go on make your first claim now!</i></h4> <br>
 {% endif %}
-
+<br>
 {% include "claim.html" %}
 
 {% endblock content %}  

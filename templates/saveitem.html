@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}Favorite list{% endblock title %}
+
+{% block content %}
+
+<h2>Favorite items</h2>
+
+<h4 style="color: red;">{{msgtext}} </h4>
+
+<p> Found about {{numresults}} in your profile </p>
+
+<!-- <form action="/deleteitem/" method="POST" style="display: inline-block;">
+  {%csrf_token%}
+  <button class="btn btn-danger btn-sm" type="submit" name="deleteitemid" value=-1
+    style="display: inline-block;margin: 0;">Delete all items</button>
+</form>
+<br> -->
+
+
+{% for item in output %}
+<div class="row">
+  <div class="column" style="background-color:#eee; border: 4px solid black; padding:20px; border-radius: 30px;">
+
+    <a href={{item.identifier_sourceurl}}><b>{{item.title}}</b></a>
+    <brsmall>
+      {{item.contributor_author}},
+      {{item.date_issued}},
+      {{item.contributor_department}},
+      {{item.description_degree}}
+
+      <brsmall>
+        <b>Abstract</b>: {{item.description_abstract|slice:":210"}}...
+        <!-- <b>Abstract</b>: {{item.description_abstract|slice:":210"}}... -->
+        <form action="/serpdetails/" method="POST" style="display: inline-block;" target="_blank">
+          {%csrf_token%}
+          <button class="btn btn-info  btn-sm" type="submit" name="handle" value={{item.handle}}
+            style="border:none;color: white;">More info</button>
+        </form>
+        <br>
+
+        <form action="/deleteitem/" method="POST" style="display: inline-block;">
+          {%csrf_token%}
+          <button class="btn btn-danger btn-sm" type="submit" name="deleteitemid" value={{item.id}}
+            style="display: inline-block;margin: 0;">Delete item</button>
+        </form>
+
+  </div>
+</div>
+<brsmall>
+  {%endfor%}
+<br>
+  {% include "pagination.html" %}
+
+
+  {% endblock content %}

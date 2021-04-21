@@ -5,6 +5,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
+from .views import delete_claim_view
 
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='home'),
@@ -23,4 +24,12 @@ urlpatterns = [
 
     path('claim/', views.ClaimSubmitView, name='claim'),
 
-]
+    path('delete_claim_view/', views.delete_claim_view, name='delete_claim_view'),
+
+    path('saveitem/', views.SaveItemView, name='saveitem'),
+
+    path('deleteitem/', views.DeleteItemView, name='deleteitem'),
+
+    # path('like/', views.like, name='like'),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

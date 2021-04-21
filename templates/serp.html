@@ -1,5 +1,6 @@
 <!-- templates/home.html -->
 {% extends 'base.html' %}
+{% load highlight_text %}
 {% block title %}SERP{% endblock title %}
 
 {% block content %}
@@ -11,32 +12,37 @@
 
 
 {% for item in output %}
-<div style="margin: 15px 50px 75px 10px;">
+<div style="border: 4px solid black; padding:20px; border-radius: 30px;">
   <div class="row">
     <div class="column" style="background-color:#eee; padding: 10px; border-radius:30px">
 
-      <a href={{item.identifier_sourceurl}}><b>{{item.title}}</b></a>
-      <br>
+      <a href={{item.identifier_sourceurl}}><b>{{item.title|highlight_text:high_text_inp}}</b></a>
       {{item.contributor_author}},
       {{item.date_issued}},
       {{item.contributor_department}}
 
       <brsmall>
-      <b>Abstract</b>: {{item.description_abstract|slice:":210"}}...
+      <b>Abstract</b>: {{item.description_abstract|slice:":210"|highlight_text:high_text_inp}}...
       <form action="/serpdetails/" method="POST" style="display: inline-block;">
         {%csrf_token%}
         <button class="btn btn-info  btn-sm" type="submit" name="handle" value={{item.handle}}
           style="border:none;color: white;">More info</button>
       </form>
+      <form action="/saveitem/" method="POST" style="display: inline-block;" target="_blank">
+        {%csrf_token%}
+        <button class="btn btn-success btn-sm" type="submit" name="handle" value={{item.handle}}
+          style="border:none;color: bwhite;">Save</button>
+      </form>
+
       <br>
-      <hr style="border: 1px solid black;">
+      <!-- <hr style="border: 1px solid black;"> -->
       <br>
     </div>
   </div>
 </div>
 <brsmall>
 {%endfor%}
-
+<br>
 {% include "pagination.html" %}
 
 {%else%}
