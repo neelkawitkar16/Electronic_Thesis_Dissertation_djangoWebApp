@@ -30,6 +30,8 @@ urlpatterns = [
 
     path('deleteitem/', views.DeleteItemView, name='deleteitem'),
 
-    # path('like/', views.like, name='like'),
+    path('claimlike/', views.ClaimLikeView, name='claimlike'),
+
+    path('autocomplete/', views.AutoCompleteView, name='autocomplete'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

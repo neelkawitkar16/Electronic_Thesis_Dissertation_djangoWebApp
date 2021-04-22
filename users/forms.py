@@ -93,7 +93,7 @@ class UploadForm(forms.ModelForm):
 
     contributor_committeemember = forms.CharField(max_length=500, required=True,
                                                   widget=forms.TextInput(attrs={'class': 'form-control',
-                                                                                'placeholder': 'Enter namesin quotes (Eg:" Jian Wu" "Ravi Mukkamala" "Michele C. Weigle")'})
+                                                                                'placeholder': 'Eg: "Dr. Jian Wu"'})
                                                   )
 
     contributor_department = forms.CharField(max_length=500, required=True,
@@ -107,7 +107,7 @@ class UploadForm(forms.ModelForm):
 
     subject = forms.CharField(max_length=500, required=True,
                               widget=forms.TextInput(attrs={'class': 'form-control',
-                                                            'placeholder': 'Enter keywords in quotes (Eg: "VSC","SMES","Multi-Level",)'}))
+                                                            'placeholder': 'Robotics'}))
 
     identifier_sourceurl = forms.CharField(max_length=500, required=True,
                                            widget=forms.TextInput(attrs={'class': 'form-control',
@@ -162,4 +162,4 @@ class ClaimForm(forms.ModelForm):
 class ClaimLikeForm(forms.ModelForm):
     class Meta:
         model = ClaimLikeModel
-        fields = ('star', 'handle',)
+        fields = ('id',)

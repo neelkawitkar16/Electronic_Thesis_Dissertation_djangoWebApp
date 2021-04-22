@@ -4,18 +4,20 @@
 {% block content %}
 <!-- Users can upload files by using upload button -->
 {% if msg%}
-Uploaded sucufully
+<i>
+  <h3>Uploaded succesfully!</h3>
+</i>
 {% endif %}
 
-<h2>Upload files</h2>
+<h2 style="text-align: center; margin-top:20px">Upload Files</h2>
 <br>
 <!--multipart/form-data must be included for uploading a document-->
-<div style="border: 4px solid black; padding:20px">
+<div style="border: 4px solid black; padding:20px; border-radius: 30px;">
   <form method="POST" enctype="multipart/form-data" style="margin-bottom: 20px;">
     {%csrf_token%}
     {{form.as_p}}
     <!-- accept="application/pdf" is used to accept only pdf-->
-    <button type="submit" accept="application/pdf">Upload</button>
+    <button class="btn btn-primary" type="submit" accept="application/pdf">Upload</button>
   </form>
 </div>
 

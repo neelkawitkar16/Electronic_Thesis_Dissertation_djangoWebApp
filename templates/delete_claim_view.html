@@ -1,3 +1,6 @@
+<!-- <form action="/serpdetails/" method="POST" style="display: inline-block;"></form> -->
+
+{% if claim.authorized_user %}
 <form action="/delete_claim_view/" method="POST">
   <!-- Security token by Django -->
   {% csrf_token %}
@@ -5,5 +8,4 @@
   <button class="btn btn-danger btn-sm" type="submit" name="neel" value={{claim.id}}
     style="border:none;color: white;">Delete</button>
 </form>
-
-<!-- <form action="/serpdetails/" method="POST" style="display: inline-block;"></form> -->
+{% endif %}

@@ -62,8 +62,51 @@
 <br>
 {% for claim in allclaims %}
 {% include "delete_claim_view.html"%}
-<!-- {{claim}} -->
+
 <div style="border: 4px dotted rgba(0, 0, 0, 0.932); padding:10px;">
+<!-- --------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------- -->
+{% if user.is_authenticated %}
+
+<span class="" id="{{claim.idliked}}">{{claim.totallikes}}</span>
+{% if claim.liked %}
+<a name="{{claim.idliked}}" style="border:none; font-size:30px;color: blue;" class="likebutton" id="co">
+  <i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+{% else %}
+<a name="{{claim.idliked}}" style="border:none; font-size:30px;color: black;" class="likebutton" id="co">
+  <i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+{% endif %}
+
+<span class="" id="{{claim.idunliked}}">{{claim.totalunlikes}}</span>
+{% if claim.unliked %}
+<a name="{{claim.idunliked}}" style="border:none; font-size:30px;color: red;" class="likebutton" id="co">
+  <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+{% else %}
+<a name="{{claim.idunliked}}" style="border:none; font-size:30px;color: black;" class="likebutton" id="co">
+  <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+{% endif %}
+
+Net: <span class="" id="{{claim.idnetliked}}">{{claim.netlikes}}</span>
+
+<!-- --------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------- -->
+<!-- --------------------------------------------------------------- -->
+{% else %}
+
+<span class="" id="">{{claim.totallikes}}</span>
+<a name="" style="border:none; font-size:30px;color: black;" id="co">
+  <i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+
+<span class="" id="">{{claim.totalunlikes}}</span>
+<a name="" style="border:none; font-size:30px;color: black;" id="co">
+  <i class="fa fa-thumbs-down" aria-hidden="true"></i></a>
+
+{% endif %}
+
+
+<br>
   <b>claim: </b>{{claim.claim_field}} <br>
   <b>source_Code: </b>{{claim.source_Code}} <br>
   <b>Can_you_reproduce_this_claim: </b>{{claim.Can_you_reproduce_this_claim}} <br>
@@ -82,4 +125,37 @@
 <br>
 {% include "claim.html" %}
 
+<script>
+  $(document).ready(function () {
+
+    $(".likebutton").click(function () {
+      $.ajax({
+        url: '/claimlike',
+        type: 'GET',
+        data: { idcrude: $(this).attr('name') },
+        success: function (result) {
+
+          document.getElementById(result['idliked']).innerHTML = result['likecount']
+          document.getElementById(result['idunliked']).innerHTML = result['unlikecount']
+          document.getElementById(result['idnetliked']).innerHTML = result['netcount']
+
+          selector = document.getElementsByName(result['idliked']);
+          if (result['liked']) { $(selector).css("color", "blue"); }
+          else { $(selector).css("color", "black"); }
+
+          selector = document.getElementsByName(result['idunliked']);
+          if (result['unliked']) { $(selector).css("color", "red"); }
+          else { $(selector).css("color", "black"); }
+        },
+        error: function (xhr, errmsg, err) { }
+      });
+    });
+  });
+
+
+
+
+</script>
+
 {% endblock content %}  
+  

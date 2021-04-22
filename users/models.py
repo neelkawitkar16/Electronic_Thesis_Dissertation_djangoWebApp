@@ -47,7 +47,8 @@ class ClaimModel(models.Model):
 class ClaimLikeModel(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE,)
     handle = models.CharField(max_length=500)
-    star = models.BooleanField(default=False)
+    claim_id = models.IntegerField(null=False, default=0)
+    star = models.IntegerField(null=False, default=0)
 
 
 class SaveItemModel(models.Model):
@@ -55,3 +56,4 @@ class SaveItemModel(models.Model):
         CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     handle = models.CharField(max_length=500, blank=False, unique=True)
     date = models.DateTimeField(auto_now=True)
+  

@@ -3,11 +3,13 @@
 
 {% block content %}
 
-<h2>Favorite items</h2>
+<h2 style="text-align: center; margin-top:20px">Favorite Items</h2>
 
 <h4 style="color: red;">{{msgtext}} </h4>
 
-<p> Found about {{numresults}} in your profile </p>
+<p>
+<h4><i>Found about {{numresults}} items </i></h4>
+</p>
 
 <!-- <form action="/deleteitem/" method="POST" style="display: inline-block;">
   {%csrf_token%}
