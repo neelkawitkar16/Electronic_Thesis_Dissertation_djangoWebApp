@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'gsi700qodb8qb9@^hxa&sli@g)iox2h*k-dfnn&h2z9u$0q*)y'
+SECRET_KEY = 'gsi700qodb8qb9@^h2h*k-dfnn&h2z9u$0q*)y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -147,9 +147,9 @@ MEDIA_URL = '/media/'
 
 #password reset
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-DEFAULT_FROM_EMAIL = 'nkawitkar97@gmail.com'
+DEFAULT_FROM_EMAIL = '******@gmail.com'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = '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'
+EMAIL_HOST_PASSWORD = 'SG.bUcIrKsZRFqKxhoWV-2MCQ.WwLBE63IHyj2HrNPmAHLUkmedH'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
